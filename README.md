@@ -59,3 +59,25 @@ Observe that the Manchester encoding results in 0 being encoded as a low-to-high
         Give an implementation of the three above-mentioned encoding strategies using your favorite programming language.
         Your program should accept as input a binary string and encode it using those three encoding strategies.
         The output of your program should be like the one shown on Fig. 2
+
+# Project 3: Special Encoding Scheme
+
+Problem Statement:
+
+We assume that the sending node sends integer values to the receiving node.
+First, the sender encodes the integer it wants to send using a special encoding scheme, which can be described as follows:
+
+An integer value, denoted by N, is a non-zero integer between –121 and 121.
+The sender produces a decomposition of an integer value using powers of 3, namely 1 (or 3^0 ), 3 (or 3^1 ), 9 (or 3^2), 27 (or 3^3), and 81 (or 3^4).
+The sender sends a sequence of –1, 0, and/or 1, each of which is associated with a power of 3.
+The receiver decodes the received sequence of –1, 0, and/or 1 to obtain the same value sent by the sender.
+Constraint: Each power of 3 (i.e., 1, 3, 9, 27, and 81) should appear exactly once in the decomposition and is preceded by a coefficient, which can be –1, 0, or 1.
+
+1. Propose an algorithm for this special encoding scheme using socket.
+
+        The client receives the input (i.e., integer value between –121 and 121) from the user and sends it to the server.
+        The server generates the code (i.e., sequence of –1, 0, and/or 1) and sends it back to the client.
+        The client receives the code from the server and visualizes it.
+2. Prove that your proposed algorithm is correct using informal proof (i.e., discussion).
+3. Provide an implementation of your algorithm using the client/server model (i.e., socket). Feel free to use your favorite programming language
+Observation: The intervals [-121,-41], [-40,-14], [-13,-5], [-4,-2], [-1,-1], [1,1], [2,4], [5,13], [14,40], and [41,121] play a particular role.
