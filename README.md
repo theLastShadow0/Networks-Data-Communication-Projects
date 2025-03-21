@@ -36,8 +36,14 @@ Therefore, the task is to encode the binary data that the source node wants to s
 Assume that we are working with two discrete signals: high and low.
 In practice, these signals might correspond to two different voltages on a copper-based link, two different power levels on an optical link, or two different amplitudes on a radio transmission.
 
+
+![image](https://github.com/user-attachments/assets/75fc4c81-b5c3-488f-89be-45188f81b5f9)
+Fig. 1: Signals traveling between signaling components – Bits flowing between adaptors
+
 The network adaptor – a piece of hardware that connects a node to a link – contains a signaling component that encodes bits into signals at the sending node and decodes signals into bits at the receiving node (Fig. 1).
 There are three encoding strategies (Fig. 2), called Non-Return to Zero (NRZ), Non-Return to Zero Inverted (NRZI), and Manchester Encoding, respectively.
+
+
 ![image](https://github.com/user-attachments/assets/5cb2d525-b8d0-49e6-9df0-faed39849cc4)
 Fig. 2: NRZ, NRZI, and Manchester Encoding strategies
 
@@ -50,5 +56,6 @@ Fig. 2: NRZ, NRZI, and Manchester Encoding strategies
 Observe that the Manchester encoding results in 0 being encoded as a low-to-high transition and 1 being encoded as a high-to-low transition.
 
         Discuss each of those three encoding strategies.
-        Give an implementation of the three above-mentioned encoding strategies using your favorite programming language. Your program should accept as input a binary string and encode it using those three encoding strategies.
+        Give an implementation of the three above-mentioned encoding strategies using your favorite programming language.
+        Your program should accept as input a binary string and encode it using those three encoding strategies.
         The output of your program should be like the one shown on Fig. 2
