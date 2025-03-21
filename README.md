@@ -1,7 +1,5 @@
 # Networks-Data-Communication-Projects
-#Project 1: 
-
-Problem Analysis, Problem Solving, and Programming – Socket Programming Using TCP/IP
+# Project 1: Problem Analysis, Problem Solving, and Programming – Socket Programming Using TCP/IP
 
 Problem Statement: 
 
@@ -28,3 +26,29 @@ Also, your algorithm Sort_TAM_Server is correct only if the four constraints bel
 2. Show that Sort_TAM_Server is correct using an informal proof (i.e., discussion).
 3. Give a full program corresponding to the client and server using your favorite programming
 language.
+
+# Project 2: Encoding Strategies
+
+Problem Statement:
+
+The first step in turning nodes and physical links into usable building blocks is to understand how to connect them in such a way that bits can be transmitted from one node to the other.
+Therefore, the task is to encode the binary data that the source node wants to send into the signals that the physical links can carry and then to decode the signal back into the corresponding binary data at the receiving node.
+Assume that we are working with two discrete signals: high and low.
+In practice, these signals might correspond to two different voltages on a copper-based link, two different power levels on an optical link, or two different amplitudes on a radio transmission.
+
+The network adaptor – a piece of hardware that connects a node to a link – contains a signaling component that encodes bits into signals at the sending node and decodes signals into bits at the receiving node (Fig. 1).
+There are three encoding strategies (Fig. 2), called Non-Return to Zero (NRZ), Non-Return to Zero Inverted (NRZI), and Manchester Encoding, respectively.
+![image](https://github.com/user-attachments/assets/5cb2d525-b8d0-49e6-9df0-faed39849cc4)
+Fig. 2: NRZ, NRZI, and Manchester Encoding strategies
+
+
+        Encoding Strategy 1 (Non-Return to Zero “NRZ”): NRZ maps the data value 1 onto the high signal and the data value 0 onto the low signal.
+        Encoding Strategy 2 (Non-Return to Zero Inverted “NRZI”): NRZI has the sender make a transition from the current signal to encode a 1 and stay at the current signal to encode a 0.
+        Encoding Strategy 3 (Manchester Encoding): Manchester encoding does a more explicit job of merging the clock with the signal by transmitting the exclusive OR of the NRZ-encoded data and the clock. 
+        You can think of the local clock as an internal signal that alternates from low to high; a low/high pair is considered one clock cycle.
+
+Observe that the Manchester encoding results in 0 being encoded as a low-to-high transition and 1 being encoded as a high-to-low transition.
+
+        Discuss each of those three encoding strategies.
+        Give an implementation of the three above-mentioned encoding strategies using your favorite programming language. Your program should accept as input a binary string and encode it using those three encoding strategies.
+        The output of your program should be like the one shown on Fig. 2
