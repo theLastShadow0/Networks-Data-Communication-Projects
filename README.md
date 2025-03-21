@@ -1,5 +1,5 @@
 # Networks-Data-Communication-Projects
-# Project 1: Problem Analysis, Problem Solving, and Programming – Socket Programming Using TCP/IP
+# Project 1: Socket Programming Using TCP/IP
 
 Problem Statement: 
 
