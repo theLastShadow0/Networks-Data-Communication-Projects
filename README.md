@@ -24,8 +24,7 @@ Also, your algorithm Sort_TAM_Server is correct only if the four constraints bel
         Constraint 3: No extra space can be used by the algorithm Sort_TAM_Server. In other words, only the array TAM_TAB_Server can be used to sort the ‘A’, ‘M’, or ‘T’.
         Constraint 4: The algorithm, Sort_TAM_Server, cannot count the number of each letter ‘A’, ‘M’, or ‘T’ in TAM_TAB_Server.
 2. Show that Sort_TAM_Server is correct using an informal proof (i.e., discussion).
-3. Give a full program corresponding to the client and server using your favorite programming
-language.
+3. Give a full program corresponding to the client and server using your favorite programming language.
 
 # Project 2: Encoding Strategies
 
@@ -80,4 +79,5 @@ Constraint: Each power of 3 (i.e., 1, 3, 9, 27, and 81) should appear exactly on
         The client receives the code from the server and visualizes it.
 2. Prove that your proposed algorithm is correct using informal proof (i.e., discussion).
 3. Provide an implementation of your algorithm using the client/server model (i.e., socket). Feel free to use your favorite programming language
+
 Observation: The intervals [-121,-41], [-40,-14], [-13,-5], [-4,-2], [-1,-1], [1,1], [2,4], [5,13], [14,40], and [41,121] play a particular role.
