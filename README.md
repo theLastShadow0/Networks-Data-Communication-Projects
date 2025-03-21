@@ -1,8 +1,10 @@
 # Networks-Data-Communication-Projects
-Project 1: 
+#Project 1: 
+
 Problem Analysis, Problem Solving, and Programming – Socket Programming Using TCP/IP
 
 Problem Statement: 
+
 Socket programming can be used to allow two nodes on a network to communicate with each other.
 While the first socket (node) listens on a particular port at an IP, the second socket reaches out to the first one to form a connection.
 While the server forms the listener socket, the client constitutes the requesting socket that reaches out to the server.
