@@ -25,6 +25,13 @@ def special_encoding_scheme(N: int):
         if nums[i] < 0:
             powers[i] = -powers[i]
     return nums, powers, value
+nums, powers, value = special_encoding_scheme(121)
 
-nums, powers, value = special_encoding_scheme(-121)
-print(f"The decomposition of the number is {powers} = {value} and the sequence is {nums}")
+powers_add = str(powers[0])
+for i in powers[1:]:
+    if i < 0:
+        powers_add += f"{i}"
+    else:
+        powers_add += f"+{i}"
+
+print(f"Decomposition of {value} is {powers}\nSum: {powers_add} = {sum(powers)}\nThe sequence is {nums}")

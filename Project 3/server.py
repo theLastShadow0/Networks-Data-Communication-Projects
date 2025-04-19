@@ -67,7 +67,15 @@ with conn:
         try:
             data_int = int(data_str)
             nums, powers, value = special_encoding_scheme(data_int)
-            message = f"The decomposition of {value} is {powers} \n and the sequence is {nums}"
+            
+            powers_add = str(powers[0])
+            for i in powers[1:]:
+                if i < 0:
+                    powers_add += f"{i}"
+                else:
+                    powers_add += f"+{i}"
+
+            message = f"Decomposition of {value} is {powers}\nSum: {powers_add} = {sum(powers)}\nThe sequence is {nums}"
         except ValueError:
             message = (b"Invalid input.")
         conn.sendall(message.encode())
