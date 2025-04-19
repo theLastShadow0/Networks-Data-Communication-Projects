@@ -40,25 +40,21 @@ def executeProgram():
     clientScript()
 
 
-def clientScript(TAM):
+def clientScript(ses):
     
     HOST = "127.0.0.1"
     PORT = 8080
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST,PORT))
-
-        if TAM == '#':
-            output=tk.Label(root, text = "The input is empty.\n Press 'Retry Program' to start again.", font=("Arial",18))
-            output.pack(pady=10)
-        elif " " in TAM:
-            output=tk.Label(root, text = "No spaced allowed.\n Press 'Retry Program' to start again.", font=("Arial",18))
-            output.pack(pady=10)
+        num = int(ses)
+        if num < -121 or num > 121:
+            output = tk.Label(root, text = "Error: cannot enter anything less than -121 or greater than 121.", font=("Arial", 18))
         else:
-            s.sendall(TAM.encode())
+            s.sendall(ses.encode())
             data = s.recv(1024)
-
-    output = tk.Label(root, text=f"The sorted sequence is: {data.decode()}",font=("Arial",18))
+            output = tk.Label(root, text=f"{data.decode()}",font=("Arial",18))
+    
     output.pack(pady=10)
     
 
@@ -72,15 +68,16 @@ def mainPage():
     label = tk.Label(root, text="Overview", font =('Arial', 18))
     label.pack()
 
-    label = tk.Label(root, text="""
-   We assume that the sending node sends integer values to the receiving node. First, the sender encodes the integer it wants to send using a special encoding scheme, which can be described as follows:\n
-
+    label = tk.Label(root, text=
+                     """
+We assume that the sending node sends integer values to the receiving node. First, the sender encodes the integer it wants to send using a special encoding scheme, which can be described as follows:\n
 An integer value, denoted by N, is a non-zero integer between –121 and 121. The sender produces a decomposition of an integer value using powers of 3, namely 1 (or 3^0 ), 3 (or 3^1 ), 9 (or 3^2), 27 (or 3^3), and 81 (or 3^4).\n
-
 The sender sends a sequence of –1, 0, and/or 1, each of which is associated with a power of 3. The receiver decodes the received sequence of –1, 0, and/or 1 to obtain the same value sent by the sender.\n
-
 Constraint: Each power of 3 (i.e., 1, 3, 9, 27, and 81) should appear exactly once in the decomposition and is preceded by a coefficient, which can be –1, 0, or 1.\n
-    To exit the program, click "Exit Program".""", font=('Arial',14),wraplength=800,justify="center")
+EXAMPLE: N = –3 = 0 × 81 + 0 × 27 + 0 × 9 – 1 × 3 + 0 × 1 \n
+Code sent: (0, 0, 0, –1, 0) \n
+To exit the program, click "Exit Program". \n
+                     """,font=('Arial',14),wraplength=800,justify="center")
     label.pack(padx=10,pady=10)
 
 
@@ -98,4 +95,4 @@ mainPage()
 
 root.mainloop()
 
-sp = subprocess.terminate()
+sp.terminate()

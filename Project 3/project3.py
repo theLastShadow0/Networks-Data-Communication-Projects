@@ -1,4 +1,5 @@
 def special_encoding_scheme(N: int):
+    value = N
     powers = [81, 27, 9, 3, 1]
     nums = [0,0,0,0,0]
     for i in range(5):
@@ -19,14 +20,11 @@ def special_encoding_scheme(N: int):
                     N = N - powers[i]
             else:
                 nums[i] = 0
-    return nums
+    
+    for i in range(5):
+        if nums[i] < 0:
+            powers[i] = -powers[i]
+    return nums, powers, value
 
-print(special_encoding_scheme(-3))
-print(special_encoding_scheme(7))
-print(special_encoding_scheme(-5))
-print(special_encoding_scheme(9))
-print(special_encoding_scheme(-16))
-print(special_encoding_scheme(25))
-print(special_encoding_scheme(-89))
-print(special_encoding_scheme(121))
-print(special_encoding_scheme(-121))
+nums, powers, value = special_encoding_scheme(-121)
+print(f"The decomposition of the number is {powers} = {value} and the sequence is {nums}")
