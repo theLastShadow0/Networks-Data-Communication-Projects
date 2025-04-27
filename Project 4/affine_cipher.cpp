@@ -29,6 +29,7 @@ void decryptCipherText(vector<char> cipherText, int B, int A, vector<char> alpha
         }
     }
 
+    cout << "Decryption: " << "(X - B)* a^-1 mod 26" << endl;
     for (int i = 0; i < cipherText.size(); i++){
         for (int j = 0; j < 26; j++){
 
@@ -44,8 +45,8 @@ void decryptCipherText(vector<char> cipherText, int B, int A, vector<char> alpha
                  }
 
                  plainText.push_back(alphabet[decryption]);
-                 cout << "Decryption: " << "(X - B)* a^-1 mod 26" << endl;
-                 cout << X << " - " << B << " * " << inverse_A << " mod 26 = " << decryption << "(" << alphabet[decryption] << ")" << endl;
+                 
+                 cout << X <<"(" << cipherText[i] << ")" << " - " << B << " * " << inverse_A << " mod 26 = " << decryption << "(" << alphabet[decryption] << ")" << endl;
                  break;
             }
         }
@@ -88,14 +89,15 @@ int main(){
     getline (cin, plainText);
 
     //Encryption and Output
+    cout << "Encryption: " << "(A * X + B) mod 26" << endl;
     for (int i = 0; i < plainText.length(); i++){
         for (int j = 0; j < 26; j++){
             if (plainText[i] == alphabet[j]){
                 X = j;
                 encryption = (A * X + B) % 26;
                 cipherText.push_back(alphabet[encryption]);
-                cout << "Encryption: " << "(A * X + B) mod 26" << endl;
-                cout << A << " * " << X << " + " << B << " mod 26 = " << encryption << "(" << alphabet[encryption] << ")"<< endl;
+                
+                cout << A << " * " << X << "(" << plainText[i] << ")" << " + " << B << " mod 26 = " << encryption << "(" << alphabet[encryption] << ")"<< endl;
                 break;
             }
         }
