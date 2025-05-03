@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import string
+import platform
 
 ALPHABET = string.ascii_lowercase
 INVALID_A = {2,4,6,8,10,12,13,14,16,18,20,22,24}
@@ -41,44 +42,44 @@ class AffineCipherGUI:
             "3. Provide a program simulating this cipher, displaying ciphertext,\n"
             "   plaintext, and key, with step-by-step details."
         )
-        lbl = tk.Label(self.overview_frame, text=overview_text, justify="left", font=("Arial", 16))
+        lbl = tk.Label(self.overview_frame, text=overview_text, justify="left", font=("Arial", 20))
         lbl.pack(fill="both", expand=True)
 
-        btn_start = tk.Button(self.overview_frame, text="Begin", command=self.show_main)
+        btn_start = tk.Button(self.overview_frame, text="Begin", command=self.show_main,font=("Arial", 30))
         btn_start.pack()
 
         # Main frame
         self.main_frame = tk.Frame(root)
         for i in range(4):
-            self.main_frame.columnconfigure(i, weight=1)
+            self.main_frame.columnconfigure(i, weight=0)
         for i in range(6):
-            self.main_frame.rowconfigure(i, weight=1)
+            self.main_frame.rowconfigure(i, weight=0)
 
         tk.Label(self.main_frame, text="Key A:").grid(row=0, column=0, sticky="e")
-        self.entryA = tk.Entry(self.main_frame)
+        self.entryA = tk.Entry(self.main_frame,font=("Arial",20))
         self.entryA.grid(row=0, column=1, sticky="we")
 
         tk.Label(self.main_frame, text="Key B:").grid(row=0, column=2, sticky="e")
-        self.entryB = tk.Entry(self.main_frame)
+        self.entryB = tk.Entry(self.main_frame,font=("Arial",20))
         self.entryB.grid(row=0, column=3, sticky="we")
 
         tk.Label(self.main_frame, text="Input:").grid(row=1, column=0, sticky="n")
-        self.text_input = tk.Text(self.main_frame)
-        self.text_input.grid(row=1, column=1, columnspan=3, sticky="nsew")
+        self.text_input = tk.Text(self.main_frame, height=5, width=40, font=("Arial",20))
+        self.text_input.grid(row=1, column=1, columnspan=3, sticky="w")
 
-        self.encrypt_btn = tk.Button(self.main_frame, text="Encrypt", command=self.encrypt_action)
+        self.encrypt_btn = tk.Button(self.main_frame, text="Encrypt", command=self.encrypt_action,font=("Arial",20),bg="green", fg="white")
         self.encrypt_btn.grid(row=2, column=1, sticky="ew")
 
-        self.decrypt_btn = tk.Button(self.main_frame, text="Decrypt", command=self.decrypt_action)
+        self.decrypt_btn = tk.Button(self.main_frame, text="Decrypt", command=self.decrypt_action,font=("Arial",20),bg="red", fg="white")
         self.decrypt_btn.grid(row=2, column=2, sticky="ew")
 
         tk.Label(self.main_frame, text="Output:").grid(row=3, column=0, sticky="n")
-        self.text_output = tk.Text(self.main_frame, state="disabled")
-        self.text_output.grid(row=3, column=1, columnspan=3, sticky="nsew")
+        self.text_output = tk.Text(self.main_frame, state="disabled",height=5, width=40, font=("Arial",20))
+        self.text_output.grid(row=3, column=1, columnspan=3, sticky="w")
 
         tk.Label(self.main_frame, text="Steps:").grid(row=4, column=0, sticky="n")
-        self.text_log = tk.Text(self.main_frame, state="disabled")
-        self.text_log.grid(row=4, column=1, columnspan=3, sticky="nsew")
+        self.text_log = tk.Text(self.main_frame, state="disabled", width=40, font=("Arial",20))
+        self.text_log.grid(row=4, column=1, columnspan=3, sticky="w")
 
     def show_main(self):
         self.overview_frame.pack_forget()
