@@ -16,8 +16,7 @@ class AffineCipherGUI:
     def __init__(self, root):
         self.root = root
         root.title("Affine Cipher")
-
-        # Fullscreen / maximized
+        # Fullscreen
         try:
             root.state('zoomed')
         except:
@@ -42,51 +41,44 @@ class AffineCipherGUI:
             "3. Provide a program simulating this cipher, displaying ciphertext,\n"
             "   plaintext, and key, with step-by-step details."
         )
-        lbl = tk.Label(self.overview_frame, text=overview_text, justify="left", font=("Arial", 14))
-        lbl.pack(padx=20, pady=20, expand=True)
+        lbl = tk.Label(self.overview_frame, text=overview_text, justify="left", font=("Arial", 16))
+        lbl.pack(fill="both", expand=True)
 
-        btn_start = tk.Button(self.overview_frame, text="Begin", font=("Arial", 16), command=self.show_main)
-        btn_start.pack(pady=10)
+        btn_start = tk.Button(self.overview_frame, text="Begin", command=self.show_main)
+        btn_start.pack()
 
-        # Main cipher frame (hidden initially)
+        # Main frame
         self.main_frame = tk.Frame(root)
-
-        # Configure grid
         for i in range(4):
             self.main_frame.columnconfigure(i, weight=1)
         for i in range(6):
             self.main_frame.rowconfigure(i, weight=1)
 
-        # Key inputs
-        tk.Label(self.main_frame, text="Key A:", anchor="e").grid(row=0, column=0, sticky="e", padx=5, pady=5)
+        tk.Label(self.main_frame, text="Key A:").grid(row=0, column=0, sticky="e")
         self.entryA = tk.Entry(self.main_frame)
-        self.entryA.grid(row=0, column=1, sticky="we", padx=5, pady=5)
+        self.entryA.grid(row=0, column=1, sticky="we")
 
-        tk.Label(self.main_frame, text="Key B:", anchor="e").grid(row=0, column=2, sticky="e", padx=5, pady=5)
+        tk.Label(self.main_frame, text="Key B:").grid(row=0, column=2, sticky="e")
         self.entryB = tk.Entry(self.main_frame)
-        self.entryB.grid(row=0, column=3, sticky="we", padx=5, pady=5)
+        self.entryB.grid(row=0, column=3, sticky="we")
 
-        # Input text
-        tk.Label(self.main_frame, text="Input Text:", anchor="nw").grid(row=1, column=0, sticky="nw", padx=5, pady=5)
+        tk.Label(self.main_frame, text="Input:").grid(row=1, column=0, sticky="n")
         self.text_input = tk.Text(self.main_frame)
-        self.text_input.grid(row=1, column=1, columnspan=3, sticky="nsew", padx=5, pady=5)
+        self.text_input.grid(row=1, column=1, columnspan=3, sticky="nsew")
 
-        # Buttons
         self.encrypt_btn = tk.Button(self.main_frame, text="Encrypt", command=self.encrypt_action)
-        self.encrypt_btn.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
+        self.encrypt_btn.grid(row=2, column=1, sticky="ew")
 
         self.decrypt_btn = tk.Button(self.main_frame, text="Decrypt", command=self.decrypt_action)
-        self.decrypt_btn.grid(row=2, column=2, sticky="ew", padx=5, pady=5)
+        self.decrypt_btn.grid(row=2, column=2, sticky="ew")
 
-        # Output text
-        tk.Label(self.main_frame, text="Output Text:", anchor="nw").grid(row=3, column=0, sticky="nw", padx=5, pady=5)
+        tk.Label(self.main_frame, text="Output:").grid(row=3, column=0, sticky="n")
         self.text_output = tk.Text(self.main_frame, state="disabled")
-        self.text_output.grid(row=3, column=1, columnspan=3, sticky="nsew", padx=5, pady=5)
+        self.text_output.grid(row=3, column=1, columnspan=3, sticky="nsew")
 
-        # Log of steps
-        tk.Label(self.main_frame, text="Steps:", anchor="nw").grid(row=4, column=0, sticky="nw", padx=5, pady=5)
-        self.text_log = tk.Text(self.main_frame, state="disabled", bg="#f0f0f0")
-        self.text_log.grid(row=4, column=1, columnspan=3, sticky="nsew", padx=5, pady=5)
+        tk.Label(self.main_frame, text="Steps:").grid(row=4, column=0, sticky="n")
+        self.text_log = tk.Text(self.main_frame, state="disabled")
+        self.text_log.grid(row=4, column=1, columnspan=3, sticky="nsew")
 
     def show_main(self):
         self.overview_frame.pack_forget()
@@ -107,56 +99,40 @@ class AffineCipherGUI:
     def encrypt_action(self):
         A, B = self.get_keys()
         if A is None: return
-        plain = self.text_input.get("1.0", tk.END).strip().lower()
-        self.text_output.config(state="normal")
-        self.text_output.delete("1.0", tk.END)
-        self.text_log.config(state="normal")
-        self.text_log.delete("1.0", tk.END)
-
-        for ch in plain:
+        self.text_output.config(state="normal"); self.text_output.delete("1.0", tk.END)
+        self.text_log.config(state="normal");   self.text_log.delete("1.0", tk.END)
+        for ch in self.text_input.get("1.0", tk.END).strip().lower():
             if ch in ALPHABET:
                 X = ALPHABET.index(ch)
                 C = (A*X + B) % 26
                 cipher_char = ALPHABET[C]
-                self.text_log.insert(tk.END,
-                    f"{A}*{X}({ch}) + {B} mod26 = {C}({cipher_char})\n")
+                self.text_log.insert(tk.END, f"{A}*{X}({ch})+{B} mod26={C}({cipher_char})\n")
                 self.text_output.insert(tk.END, cipher_char)
             else:
                 self.text_output.insert(tk.END, ch)
-
-        self.text_output.config(state="disabled")
-        self.text_log.config(state="disabled")
+        self.text_output.config(state="disabled"); self.text_log.config(state="disabled")
 
     def decrypt_action(self):
         A, B = self.get_keys()
         if A is None: return
-        cipher = self.text_input.get("1.0", tk.END).strip().lower()
-        self.text_output.config(state="normal")
-        self.text_output.delete("1.0", tk.END)
-        self.text_log.config(state="normal")
-        self.text_log.delete("1.0", tk.END)
-
+        self.text_output.config(state="normal"); self.text_output.delete("1.0", tk.END)
+        self.text_log.config(state="normal");   self.text_log.delete("1.0", tk.END)
         try:
             invA = modinv(A, 26)
         except ValueError as e:
-            messagebox.showerror("Error", str(e))
-            return
-
-        for ch in cipher:
+            messagebox.showerror("Error", str(e)); return
+        for ch in self.text_input.get("1.0", tk.END).strip().lower():
             if ch in ALPHABET:
                 X = ALPHABET.index(ch)
                 P = ((X - B) * invA) % 26
                 plain_char = ALPHABET[P]
-                self.text_log.insert(tk.END,
-                    f"({X}({ch}) - {B})*{invA} mod26 = {P}({plain_char})\n")
+                self.text_log.insert(tk.END, f"({X}({ch})-{B})*{invA} mod26={P}({plain_char})\n")
                 self.text_output.insert(tk.END, plain_char)
             else:
                 self.text_output.insert(tk.END, ch)
-
-        self.text_output.config(state="disabled")
-        self.text_log.config(state="disabled")
+        self.text_output.config(state="disabled"); self.text_log.config(state="disabled")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = AffineCipherGUI(root)
+    AffineCipherGUI(root)
     root.mainloop()
