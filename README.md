@@ -81,3 +81,23 @@ Constraint: Each power of 3 (i.e., 1, 3, 9, 27, and 81) should appear exactly on
 3. Provide an implementation of your algorithm using the client/server model (i.e., socket). Feel free to use your favorite programming language
 
 Observation: The intervals [-121,-41], [-40,-14], [-13,-5], [-4,-2], [-1,-1], [1,1], [2,4], [5,13], [14,40], and [41,121] play a particular role.
+
+# Project 4: Affine Cipher
+
+Problem Statement:
+
+The affine cipher is a substitution cipher, where a plaintext letter x is
+enciphered into a ciphertext letter y as follows:
+
+        y = αx + β (mod 26)
+The key for this encryption function is (α, β), where 0 ≤ α, β ≤ 25.
+There are 12 possible choices for α with gcd(α, 26) = 1, and 26 choices for β.
+Thus, there are 12×26 = 312 choices for the key.
+The decryption is accomplished by:
+
+    x = α⁻¹ (y − β) (mod 26)
+where α⁻¹ is the modular inverse of α.
+
+        1. Write an algorithm for the affine cipher.
+        2. Show that your proposed algorithm is correct (informal proof).
+        3. Provide a program simulating this cipher, displaying ciphertext, plaintext, and key, with step-by-step details.
