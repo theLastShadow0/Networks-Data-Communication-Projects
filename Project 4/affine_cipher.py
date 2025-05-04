@@ -27,7 +27,7 @@ class AffineCipherGUI:
         self.overview_frame = tk.Frame(root)
         self.overview_frame.pack(fill="both", expand=True)
         overview_text = (
-            "Project 2 (Affine Cipher):\n"
+            "Problem 2 (Affine Cipher):\n"
             "The affine cipher is a substitution cipher, where a plaintext letter x is\n"
             "enciphered into a ciphertext letter y as follows:\n\n"
             "    y = αx + β (mod 26)\n\n"
@@ -45,7 +45,7 @@ class AffineCipherGUI:
         lbl = tk.Label(self.overview_frame, text=overview_text, justify="left", font=("Arial", 20))
         lbl.pack(fill="both", expand=True)
 
-        btn_start = tk.Button(self.overview_frame, text="Begin", command=self.show_main,font=("Arial", 30))
+        btn_start = tk.Button(self.overview_frame, text="Begin", command=self.show_main,font=("Arial", 30),bg="green", fg="white")
         btn_start.pack()
 
         # Main frame
@@ -55,35 +55,47 @@ class AffineCipherGUI:
         for i in range(6):
             self.main_frame.rowconfigure(i, weight=0)
 
-        tk.Label(self.main_frame, text="Key A:").grid(row=0, column=0, sticky="e")
+        tk.Label(self.main_frame, text="Key A:",font=("Arial",20)).grid(row=0, column=0, sticky="e")
         self.entryA = tk.Entry(self.main_frame,font=("Arial",20))
         self.entryA.grid(row=0, column=1, sticky="we")
 
-        tk.Label(self.main_frame, text="Key B:").grid(row=0, column=2, sticky="e")
+        tk.Label(self.main_frame, text="Key B:",font=("Arial",20)).grid(row=0, column=2, sticky="e")
         self.entryB = tk.Entry(self.main_frame,font=("Arial",20))
         self.entryB.grid(row=0, column=3, sticky="we")
 
-        tk.Label(self.main_frame, text="Input:").grid(row=1, column=0, sticky="n")
-        self.text_input = tk.Text(self.main_frame, height=5, width=40, font=("Arial",20))
+        tk.Label(self.main_frame, text="Input:",font=("Arial",20)).grid(row=1, column=0, sticky="n")
+        self.text_input = tk.Text(self.main_frame, height=5, width=50, font=("Arial",20))
         self.text_input.grid(row=1, column=1, columnspan=3, sticky="w")
 
         self.encrypt_btn = tk.Button(self.main_frame, text="Encrypt", command=self.encrypt_action,font=("Arial",20),bg="green", fg="white")
         self.encrypt_btn.grid(row=2, column=1, sticky="ew")
 
         self.decrypt_btn = tk.Button(self.main_frame, text="Decrypt", command=self.decrypt_action,font=("Arial",20),bg="red", fg="white")
-        self.decrypt_btn.grid(row=2, column=2, sticky="ew")
+        self.decrypt_btn.grid(row=2, column=3, sticky="ew")
 
-        tk.Label(self.main_frame, text="Output:").grid(row=3, column=0, sticky="n")
-        self.text_output = tk.Text(self.main_frame, state="disabled",height=5, width=40, font=("Arial",20))
+        tk.Label(self.main_frame, text="Output:",font=("Arial",20)).grid(row=3, column=0, sticky="n")
+        self.text_output = tk.Text(self.main_frame, state="disabled",height=5, width=50, font=("Arial",20))
         self.text_output.grid(row=3, column=1, columnspan=3, sticky="w")
 
-        tk.Label(self.main_frame, text="Steps:").grid(row=4, column=0, sticky="n")
-        self.text_log = tk.Text(self.main_frame, state="disabled", width=40, font=("Arial",20))
+        tk.Label(self.main_frame, text="Steps:",font=("Arial",20)).grid(row=4, column=0, sticky="n")
+        self.text_log = tk.Text(self.main_frame, state="disabled", width=50, font=("Arial",20))
         self.text_log.grid(row=4, column=1, columnspan=3, sticky="w")
+
+        self.encrypt_btn = tk.Button(self.main_frame, text="Return to Overview", command=self.show_overview, font=("Arial",20))
+        self.encrypt_btn.grid(row=0, column=4, sticky="ew")
+
+        self.encrypt_btn = tk.Button(self.main_frame, text="Exit Program", command= quit, font=("Arial",20))
+        self.encrypt_btn.grid(row=0, column=5, sticky="ew")
+
+        tk.Label(self.main_frame, text="Invalid A numbers:\n 2,4,6,8,10,12,13,14,16,18,20,22,24", font=("Arial",20)).grid(row=1, column=4, sticky="ew")
 
     def show_main(self):
         self.overview_frame.pack_forget()
         self.main_frame.pack(fill="both", expand=True)
+
+    def show_overview(self):
+        self.main_frame.pack_forget()
+        self.overview_frame.pack(fill="both",expand=True)
 
     def get_keys(self):
         try:
